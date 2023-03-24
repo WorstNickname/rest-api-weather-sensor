@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sensor_db
+    username: postgres
+    password: 1
+    driverClassName: org.postgresql.Driver

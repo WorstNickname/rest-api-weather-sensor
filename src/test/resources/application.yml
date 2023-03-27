@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    name: sensor
+    generate-unique-name: false
+    url: jdbc:h2:mem:sensor
+    username: sa
+    password:
+    driverClassName: org.h2.Driver

@@ -1,34 +1,33 @@
 package com.akdev.restapiweathersensor.validator;
 
-import com.akdev.restapiweathersensor.model.Sensor;
+import com.akdev.restapiweathersensor.model.Measurement;
 import com.akdev.restapiweathersensor.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 @Component
-public class SensorValidatorImpl implements SensorValidator {
+public class MeasurementValidatorImpl implements MeasurementValidator {
 
     private final SensorService sensorService;
 
     @Autowired
-    public SensorValidatorImpl(SensorService sensorService) {
+    public MeasurementValidatorImpl(SensorService sensorService) {
         this.sensorService = sensorService;
     }
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz.equals(Sensor.class);
+        return clazz.isInstance(MeasurementValidator.class);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        var sensor = (Sensor) target;
+        var measurement = (Measurement) target;
 
-        if (sensorService.findSensorByName(sensor.getName()).isPresent()) {
-            errors.rejectValue("name", "Sensor with this name already exists");
+        if (sensorService.findSensorByName(measurement.getSensor().getName()).isEmpty()) {
+            errors.rejectValue("sensor", "No such sensor");
         }
-
     }
 
 }

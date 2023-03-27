@@ -17,7 +17,6 @@ public class SensorJpaDataAccessService implements SensorDao {
         this.sensorRepository = sensorRepository;
     }
 
-
     @Override
     public Sensor save(Sensor sensorToSave) {
         return sensorRepository.save(sensorToSave);
